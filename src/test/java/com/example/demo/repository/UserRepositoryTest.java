@@ -16,20 +16,20 @@ import static org.assertj.core.api.Assertions.*;
 @ActiveProfiles("test")
 @DisplayName("Tests du repository User")
 class UserRepositoryTest {
-   /* @Autowired
-    private UserRepository userRepository;
+    @Autowired
+    private UserRepository UserRepository;
 
     @BeforeEach
     void setUp() {
-        userRepository.deleteAll();
+        UserRepository.deleteAll();
     }
 
     @Test
     @DisplayName("Doit sauvegarder et retrouver un utilisateur")
     void saveAndFind() {
         User user = new User(1, "Ahmed", "ahmed@email.com");
-        userRepository.save(user);
-        Optional<User> found = userRepository.findById(1);
+        UserRepository.save(user);
+        Optional<User> found = UserRepository.findById(1);
         assertThat(found).isPresent();
         assertThat(found.get().getUsername()).isEqualTo("Ahmed");
     }
@@ -37,27 +37,27 @@ class UserRepositoryTest {
     @Test
     @DisplayName("Doit retourner tous les utilisateurs")
     void findAll() {
-        userRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
-        userRepository.save(new User(2, "Fatma", "fatma@email.com"));
-        List<User> users = userRepository.findAll();
+        UserRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
+        UserRepository.save(new User(2, "Fatma", "fatma@email.com"));
+        List<User> users = UserRepository.findAll();
         assertThat(users).hasSize(2);
     }
 
     @Test
     @DisplayName("Doit supprimer un utilisateur")
     void deleteUser() {
-        User user = userRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
-        userRepository.deleteById(user.getId());
-        assertThat(userRepository.existsById(1)).isFalse();
+        User user = UserRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
+        UserRepository.deleteById(user.getId());
+        assertThat(UserRepository.existsById(1)).isFalse();
     }
 
     @Test
     @DisplayName("Doit mettre à jour un utilisateur")
     void updateUser() {
-        User user = userRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
+        User user = UserRepository.save(new User(1, "Ahmed", "ahmed@email.com"));
         user.setUsername("Ahmed Updated");
-        userRepository.save(user);
-        Optional<User> updated = userRepository.findById(1);
+        UserRepository.save(user);
+        Optional<User> updated = UserRepository.findById(1);
         assertThat(updated.get().getUsername()).isEqualTo("Ahmed Updated");
-    }*/
+    }
 }

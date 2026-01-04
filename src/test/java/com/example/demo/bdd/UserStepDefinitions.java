@@ -10,25 +10,25 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 public class UserStepDefinitions {
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository UserRepository;
     private List<User> userList;
     @Before
     public void setup() {
-        userRepository.deleteAll();
+        UserRepository.deleteAll();
     }
     @Etantdonné("une base de données vide")
     public void une_base_de_donnees_vide() {
-        userRepository.deleteAll();
-        assertThat(userRepository.count()).isZero();
+        UserRepository.deleteAll();
+        assertThat(UserRepository.count()).isZero();
     }
     @Quand("je crée un utilisateur {string} avec l'email {string}")
     public void je_cree_un_utilisateur(String username, String email) {
         User user = new User(1, username, email);
-        userRepository.save(user);
+        UserRepository.save(user);
     }
     @Alors("l'utilisateur {string} existe dans la base")
     public void l_utilisateur_existe(String username) {
-        List<User> users = userRepository.findAll();
+        List<User> users = UserRepository.findAll();
         assertThat(users).anyMatch(u -> u.getUsername().equals(username));
     }
     @Etantdonné("les utilisateurs suivants existent:")
@@ -40,12 +40,12 @@ public class UserStepDefinitions {
                     row.get("username"),
                     row.get("email")
             );
-            userRepository.save(user);
+            UserRepository.save(user);
         }
     }
     @Quand("je demande la liste des utilisateurs")
     public void je_demande_la_liste() {
-        userList = userRepository.findAll();
+        userList = UserRepository.findAll();
     }
     @Alors("je reçois {int} utilisateurs")
     public void je_recois_utilisateurs(int count) {
@@ -53,15 +53,15 @@ public class UserStepDefinitions {
     }
     @Etantdonné("un utilisateur {string} existe avec l'ID {int}")
     public void un_utilisateur_existe_avec_id(String username, int id) {
-        userRepository.save(new User(id, username, username.toLowerCase() +
+        UserRepository.save(new User(id, username, username.toLowerCase() +
                 "@email.com"));
     }
     @Quand("je supprime l'utilisateur avec l'ID {int}")
     public void je_supprime_utilisateur(int id) {
-        userRepository.deleteById(id);
+        UserRepository.deleteById(id);
     }
     @Alors("l'utilisateur avec l'ID {int} n'existe plus")
     public void utilisateur_n_existe_plus(int id) {
-        assertThat(userRepository.existsById(id)).isFalse();
+        assertThat(UserRepository.existsById(id)).isFalse();
     }
 }

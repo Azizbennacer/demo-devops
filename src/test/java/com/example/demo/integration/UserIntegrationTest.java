@@ -24,15 +24,15 @@ class UserIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository UserRepository;
     @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
-        userRepository.deleteAll();
+        UserRepository.deleteAll();
     }
-/*
+
     @Test
     @Order(1)
     @DisplayName("Scénario complet: CRUD utilisateur")
@@ -45,7 +45,7 @@ class UserIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("Ahmed"));
         // Vérifier en base
-        assertThat(userRepository.count()).isEqualTo(1);
+        assertThat(UserRepository.count()).isEqualTo(1);
 // 2. READ
         mockMvc.perform(get("/api/users/1"))
                 .andExpect(status().isOk())
@@ -60,7 +60,7 @@ class UserIntegrationTest {
         // 4. DELETE
         mockMvc.perform(delete("/api/users/1"))
                 .andExpect(status().isNoContent());
-        assertThat(userRepository.count()).isEqualTo(0);
+        assertThat(UserRepository.count()).isEqualTo(0);
     }
 
     @Test
@@ -69,11 +69,11 @@ class UserIntegrationTest {
     void performanceTest() {
         long start = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
-            userRepository.save(new User(i, "User" + i, "user" + i + "@test.com"));
+            UserRepository.save(new User(i, "User" + i, "user" + i + "@test.com"));
 
         }
         long duration = System.currentTimeMillis() - start;
-        assertThat(userRepository.count()).isEqualTo(100);
+        assertThat(UserRepository.count()).isEqualTo(100);
         assertThat(duration).isLessThan(10000); // < 10 secondes
-    }*/
+    }
 }
