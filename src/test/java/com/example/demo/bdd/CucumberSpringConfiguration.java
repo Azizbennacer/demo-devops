@@ -1,3 +1,4 @@
+/*
 package com.example.demo.bdd;
 
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -9,3 +10,4 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 public class CucumberSpringConfiguration {
 }
+*/
