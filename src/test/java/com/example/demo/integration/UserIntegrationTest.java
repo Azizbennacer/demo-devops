@@ -11,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Optional;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.assertj.core.api.Assertions.*;
@@ -50,7 +52,7 @@ class UserIntegrationTest {
                 .andExpect(jsonPath("$.username").value("Ahmed"));
 
         // Vérifier en base
-        assertThat(userRepository.count()).isEqualTo(1);
+        assertThat(userRepository.count()).isEqualTo(1L);
 
         // Récupérer l’ID généré
         User saved = userRepository.findAll().get(0);
@@ -72,7 +74,11 @@ class UserIntegrationTest {
         // 4. DELETE
         mockMvc.perform(delete("/api/users/" + id))
                 .andExpect(status().isNoContent());
-        assertThat(userRepository.count()).isEqualTo(0);
+
+        // Vérifier que l’utilisateur n’existe plus
+        assertThat(userRepository.existsById(id)).isFalse();
+        Optional<User> deleted = userRepository.findById(id);
+        assertThat(deleted).isEmpty();
     }
 
     @Test
@@ -82,7 +88,7 @@ class UserIntegrationTest {
         long start = System.currentTimeMillis();
         for (int i = 0; i < 100; i++) {
             User user = new User("User" + i, "user" + i + "@test.com");
-            userRepository.save(user); // pas de setId()
+            userRepository.save(user); // JPA génère l’ID
         }
         long duration = System.currentTimeMillis() - start;
         assertThat(userRepository.count()).isEqualTo(100);
