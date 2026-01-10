@@ -1,6 +1,5 @@
 package com.example.demo.Controller;
 
-
 import com.example.demo.entity.User;
 import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +30,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
         return userService.getUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
         User updated = userService.updateUser(id, user);
         if (updated != null)
             return ResponseEntity.ok(updated);
@@ -46,8 +45,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id); // ✅ Appel via le service
         return ResponseEntity.noContent().build();
     }
 }

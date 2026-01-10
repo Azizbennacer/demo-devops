@@ -1,5 +1,18 @@
-ROM openjdk:17-jdk-slim
+# Image de base avec JDK 17 
+FROM openjdk:17-jdk-slim 
+# Métadonnées 
+LABEL maintainer="votre.email@example.com" 
+LABEL version="1.0"
+LABEL description="Application Gestion Produits"
+
+# Répertoire de travail
 WORKDIR /app
-COPY target/*.jar app.jar
+
+# Copier le JAR
+COPY target/gestion-produits-0.0.1-SNAPSHOT.jar app.jar
+
+# Port exposé
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Commande de démarrage
+CMD ["java", "-jar", "app.jar"]

@@ -14,11 +14,11 @@ public class User {
     private String username;
     private String email;
 
-    public User(int id, String username, String email) {
-        this.id = id;
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
     }
+
 
     public User() {
     }
