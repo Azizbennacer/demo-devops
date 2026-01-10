@@ -1,5 +1,5 @@
 # Image de base avec JDK 17 
-FROM openjdk:17-jdk-slim 
+FROM eclipse-temurin:17-jdk
 # Métadonnées 
 LABEL maintainer="votre.email@example.com" 
 LABEL version="1.0"
@@ -9,10 +9,12 @@ LABEL description="Application Gestion Produits"
 WORKDIR /app
 
 # Copier le JAR
-COPY target/gestion-produits-0.0.1-SNAPSHOT.jar app.jar
+COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
 
 # Port exposé
 EXPOSE 8080
 
 # Commande de démarrage
 CMD ["java", "-jar", "app.jar"]
+
+ENV SPRING_PROFILES_ACTIVE=docker
