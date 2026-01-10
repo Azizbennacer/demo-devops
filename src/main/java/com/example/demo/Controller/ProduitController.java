@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Controller;
 
 import com.example.demo.entity.User;
@@ -11,3 +12,4 @@ public class ProduitController {
     @GetMapping
     public List<Produit> getProduits() { ... }
 }
+*/
